@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display JSON</title>
+</head>
+<body>
+    <h1>Animals Data:</h1>
+    <ul>
+        {% for animal in data.animals %}
+            <>
+                <strong>Name:</strong> {{ animal.name }}<br>
+                <strong>Type:</strong> {{ animal.type }}<br>
+                <strong>Breed:</strong> {{ animal.breeds.primary }}<br>
+                <a href={{animal.url}}>URL</a>
+                <!-- Add more details as needed -->
+                <hr>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
