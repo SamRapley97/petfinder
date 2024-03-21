@@ -17,13 +17,12 @@ def fetch_dog_breeds():
     all_dog_breeds = pf.breeds(types='dog')
     return all_dog_breeds
 
-def fetch_dogs(selected_dog_breed):
-    # Specify multiple breeds in a list
-    # breeds = ["Labrador Retriever"]
-    results = []
+def fetch_dogs(selected_dog_breed, selected_location, selected_distance):
 
-  
-    dog_search = pf.animals(animal_type="dog", breed=selected_dog_breed, location="San Antonio, TX", distance="50")
+    print(selected_distance)
+ 
+    results = []
+    dog_search = pf.animals(animal_type="dog", breed=selected_dog_breed, location=selected_location, distance=selected_distance)
     results.extend(dog_search["animals"])
     
     # Save the combined results to a JSON file

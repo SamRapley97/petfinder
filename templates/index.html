@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doggo finder</title>
+</head>
+    <h1>Doggo finder</h1>
+        <strong>Select dog breed:</strong>
+        <form method="POST" action="/">
+            <select name="selected_dog_breed" id="mySelectedDogBreed">
+                {% for dog_breed in all_dog_breeds['breeds']['dog'] %}
+                <option value="{{ dog_breed }}">{{ dog_breed }}</option>
+                {% endfor %}
+            </select><br>
+            <strong>Zip code:</strong>
+            <input name="selected_location" id="mySelectedLocation"></input><br>
+            <strong>Distance:</strong>
+            <input name="selected_distance" id="mySelectedDistance"></input><br>
+            <button type="submit" class="btn btn-default">Go</button>
+            <script>
+                // Define a function to handle select element functionality
+                function handleSelectElement(mySelect) {
+                    // Retrieve the stored option value from localStorage
+                    var storedOption = localStorage.getItem(mySelect);
+                    // If there is a stored option value, set the select element to it
+                    if (storedOption) {
+                        document.getElementById(mySelect).value = storedOption;
+                    }
+        
+                    // Add event listener to the select element
+                    document.getElementById(mySelect).addEventListener('change', function() {
+                        // Store the selected option value in localStorage
+                        localStorage.setItem(mySelect, this.value);
+                    });
+                }
+        
+                // Calls the function to initialize the select element functionality
+                handleSelectElement("mySelectedDogBreed");
+                handleSelectElement("mySelectedLocation");
+                handleSelectElement("mySelectedDistance");
+
+            </script>
+        </form>
+    </form>
+    
+    
+    
+
+    <ul>
+        {% for animal in data.animals %}
+            <img>
+                <br>
+                <strong>Name:</strong> {{ animal.name }}<br>
+                <strong>Type:</strong> {{ animal.type }}<br>
+                <strong>Breed:</strong> {{ animal.breeds.primary }}<br>
+                <strong>URL:</strong> <a href={{animal.url}}>{{animal.url}}</a><br>
+                <strong>Address:</strong> {{ animal.contact.address.address1 }}, {{ animal.contact.address.city }}, {{ animal.contact.address.state }}, {{ animal.contact.address.postcode }}, {{ animal.contact.address.country }}
+                <br>
+                <img src="{{ animal.primary_photo_cropped.medium }}"><br>
+            
+              
+                <hr>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
