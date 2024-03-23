@@ -50,12 +50,14 @@
 
     <ul>
         {% for animal in data.animals %}
+            {% if animal.primary_photo_cropped is not none %}
             <img>
                 <br>
                 <strong>Name:</strong> {{ animal.name }}<br>
                 <strong>Type:</strong> {{ animal.type }}<br>
                 <strong>Breed:</strong> {{ animal.breeds.primary }}<br>
                 <strong>URL:</strong> <a href={{animal.url}}>{{animal.url}}</a><br>
+                <strong>Shelter:</strong> {{ match_organization_name(animal.organization_id)}}<br>
                 <strong>Address:</strong> {{ animal.contact.address.address1 }}, {{ animal.contact.address.city }}, {{ animal.contact.address.state }}, {{ animal.contact.address.postcode }}, {{ animal.contact.address.country }}
                 <br>
                 <img src="{{ animal.primary_photo_cropped.medium }}"><br>
@@ -63,6 +65,7 @@
               
                 <hr>
             </li>
+            {% endif %}
         {% endfor %}
     </ul>
 </body>

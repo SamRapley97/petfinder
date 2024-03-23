@@ -4,8 +4,6 @@ import petpy
 from dotenv import load_dotenv
 from flask import request
 
-
-
 load_dotenv()
 
 API_KEY = os.getenv('API_KEY')
@@ -22,7 +20,7 @@ def fetch_dogs(selected_dog_breed, selected_location, selected_distance):
     print(selected_distance)
  
     results = []
-    dog_search = pf.animals(animal_type="dog", breed=selected_dog_breed, location=selected_location, distance=selected_distance)
+    dog_search = pf.animals(animal_type="dog", breed=selected_dog_breed, age="adult", pages=1, location=selected_location, distance=selected_distance)
     results.extend(dog_search["animals"])
     
     # Save the combined results to a JSON file
@@ -30,5 +28,7 @@ def fetch_dogs(selected_dog_breed, selected_location, selected_distance):
         x = json.dump({"animals": results}, f, ensure_ascii=False, indent=4)    
     
     return x
+
+
 
 
